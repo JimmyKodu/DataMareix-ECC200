@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DataMareix_ECC200.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
+        x:Class="DataMareix_ECC200.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="DataMareix ECC200"
+        Width="400" Height="400"
+        CanResize="False">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel Spacing="16" Margin="32" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <TextBlock Text="DataMareix ECC200 Demo"
+                   FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+            <TextBlock Text="Code:" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Code}"
+                       FontFamily="Courier New" FontSize="20" FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Barcode displayed at 200×200 px; actual image is 2mm×2mm at 300 DPI -->
+        <Border BorderBrush="Gray" BorderThickness="1"
+                HorizontalAlignment="Center"
+                ToolTip.Tip="DataMatrix ECC200 – 2 mm × 2 mm at 300 DPI">
+            <Image Source="{Binding BarcodeImage}"
+                   Width="200" Height="200"
+                   RenderOptions.BitmapInterpolationMode="None"/>
+        </Border>
+
+        <TextBlock Text="Image size: 2 mm × 2 mm (300 DPI)"
+                   FontSize="11" Foreground="Gray"
+                   HorizontalAlignment="Center"/>
+
+        <Button Content="Generate New Code"
+                Command="{Binding GenerateCodeCommand}"
+                HorizontalAlignment="Center"
+                Padding="16,8"/>
+
+    </StackPanel>
+
+</Window>
